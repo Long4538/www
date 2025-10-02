@@ -1,0 +1,82 @@
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to bottom, #ff3535, #000000);
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Container chính */
+.chitiet-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  display: flex;
+  gap: 30px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+/* Ảnh poster */
+.chitiet-container img {
+  max-width: 300px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+.chitiet-container img:hover {
+  transform: scale(1.05);
+}
+
+/* Thông tin phim */
+.chitiet-info {
+  flex: 1;
+}
+.chitiet-info h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #b71c1c;
+}
+.chitiet-info p {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+.chitiet-info .mota {
+  font-style: italic;
+  color: #555;
+}
+
+/* Nút mua vé */
+.btn-muave {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 20px;
+  background: #e50914;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+.btn-muave:hover {
+  background: #b20710;
+}
+
+/* Nút quay lại */
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+.back-link:hover {
+  color: #e50914;
+}

@@ -1,0 +1,721 @@
+/* ============ AUTH FORM (Đăng nhập/Đăng ký) ============ */
+.auth-container {
+  max-width: 400px;
+  margin: 120px auto 40px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 32px rgba(229,9,20,0.12), 0 1.5px 8px rgba(0,0,0,0.08);
+  padding: 36px 32px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-title {
+  font-size: 28px;
+  color: #e50914;
+  margin-bottom: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.auth-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-label {
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+.auth-input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-size: 15px;
+  background: #fafafa;
+  transition: border 0.2s;
+}
+.auth-input:focus {
+  border: 1.5px solid #e50914;
+  outline: none;
+  background: #fff;
+}
+
+.auth-button {
+  margin-top: 10px;
+  padding: 12px;
+  background: linear-gradient(90deg, #e50914 60%, #ff3535 100%);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(229,9,20,0.08);
+  transition: background 0.2s, transform 0.2s;
+}
+.auth-button:hover {
+  background: #b20710;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.error-message {
+  color: #e50914;
+  background: #ffeaea;
+  border: 1px solid #e50914;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-link {
+  margin-top: 18px;
+  font-size: 15px;
+  color: #333;
+}
+.auth-link a {
+  color: #e50914;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 4px;
+}
+.auth-link a:hover {
+  text-decoration: underline;
+}
+/* Reset chung */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #ff3535, #000000);
+}
+
+/* ============ MENU ============ */
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px 40px;
+  z-index: 1000;
+}
+
+.topnav .logo img {
+  height: 60px;
+}
+
+.topnav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 25px;
+}
+
+.topnav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 17px;
+  padding: 8px 14px;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+
+.topnav ul li a:hover,
+.topnav ul li a.active {
+  background: #e50914;
+  color: #fff;
+}
+
+/* ============ SLIDESHOW ============ */
+/* Slideshow container */
+
+.slideshow-container {
+  position: relative;
+  margin: 40px auto 0 auto;
+  max-width: 1200px;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  background: #fff;
+  margin-top: 100px; /* trÃ¡nh menu Ä‘Ã¨ */
+}
+
+/* Ẩn tất cả slide mặc định */
+.mySlides {
+  display: none;
+  position: relative;
+}
+
+/* Ảnh trong slideshow */
+
+
+.mySlides {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.mySlides img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  transition: transform 0.4s cubic-bezier(.25,.8,.25,1), box-shadow 0.4s;
+  background: #000;
+  display: block;
+  margin: 0 auto;
+}
+.mySlides img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.28);
+}
+
+/* Nút điều hướng (prev & next) */
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin-top: -24px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 32px;
+  transition: 0.3s;
+  user-select: none;
+  border-radius: 50%;
+  background: rgba(229, 9, 20, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  border: 2px solid #fff;
+}
+
+/* Vị trí nút */
+.prev { left: 15px; }
+.next { right: 15px; }
+
+/* Hover vào nút */
+
+.prev:hover, .next:hover {
+  background: #e50914;
+  color: #fff;
+  border: 2px solid #e50914;
+}
+
+/* Text caption */
+.text {
+  color: #fff;
+  font-size: 22px;
+  padding: 12px 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* Dots dưới slideshow */
+
+.dots {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  margin: 0 7px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s, transform 0.2s;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.active, .dot:hover {
+  background-color: #e50914;
+  transform: scale(1.2);
+}
+
+/* Hiệu ứng fade */
+.fade {
+  animation: fadeEffect 1s ease-in-out;
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0.4}
+  to {opacity: 1}
+}
+
+
+/* Hiệu ứng fade */
+.fade {
+  animation: fadeEffect 1s ease-in-out;
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0.4}
+  to {opacity: 1}
+}
+
+
+
+/* ============ CONTACT PAGE ============ */
+.contact-header {
+  background: linear-gradient(to right, #ff9966, #ff5e62);
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 80px; /* trÃ¡nh menu Ä‘Ã¨ */
+}
+
+.contact-header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.contact-header p {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.contact-container {
+  display: flex;
+  gap: 30px;
+  padding: 60px 40px;
+  padding-top: 110px;
+}
+
+.contact-form, .contact-info {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  flex: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.contact-form h2 {
+  margin-bottom: 15px;
+}
+
+.contact-form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.contact-form input, 
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.contact-form textarea {
+  height: 100px;
+}
+
+.contact-form button {
+  margin-top: 15px;
+  background: #ff5e62;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background: #e14b50;
+}
+
+.contact-info .info-box {
+  margin-bottom: 15px;
+  padding: 15px;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+.contact-info .info-box h3 {
+  margin: 0 0 5px;
+  font-size: 16px;
+}
+
+   /*------------------Phim ná»•i báº­t-----------------*/
+.phimnoibat {
+  width: 90%;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.phimnoibat h2 {
+  font-size: 28px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #774e4e;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.phim-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.phim-item {
+  width: 220px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  transition: 0.3s; 
+}
+
+.phim-item img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.phim-item h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+/* ThÃ´ng tin phim */
+.phim-item p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #333;
+}
+
+.phim-item p span {
+  font-weight: bold;
+}
+
+/* NÃºt Mua vÃ© */
+.btn-muave {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: #e71a0f;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+.btn-muave:hover {
+  background: #b3150c;
+}
+
+/* Hiá»‡u á»©ng hover cho phim */
+.phim-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}
+
+/* =================Chi tiết phim=========================== */
+/* Container chính */
+.chitiet-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  display: flex;
+  gap: 30px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  padding-top:70px ;
+}
+
+/* Ảnh poster */
+.chitiet-container img {
+  max-width: 300px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+.chitiet-container img:hover {
+  transform: scale(1.05);
+}
+
+/* Thông tin phim */
+.chitiet-info {
+  flex: 1;
+}
+.chitiet-info h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #b71c1c;
+}
+.chitiet-info p {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+.chitiet-info .mota {
+  font-style: italic;
+  color: #555;
+}
+
+/* Nút mua vé */
+.btn-muave {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 20px;
+  background: #e50914;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+.btn-muave:hover {
+  background: #b20710;
+}
+
+/* Nút quay lại */
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+.back-link:hover {
+  color: #e50914;
+}
+
+
+
+
+
+/* ============ FOOTER ============ */
+footer {
+  background: #111;
+  color: #ddd;
+  padding: 40px;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-container div {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-container h4 {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* About & Social */
+.footer-about p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 18px;
+  color: #ddd;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #ff5e62;
+}
+
+/* Contact Info */
+.contact-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-info li {
+  margin: 8px 0;
+}
+
+.contact-info i {
+  margin-right: 8px;
+  color: #ff5e62;
+}
+
+/* Opening hours */
+.footer-hours p {
+  margin: 8px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-hours span {
+  color: #fff;
+}
+
+/* Bottom */
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #444;
+  margin-top: 20px;
+  padding-top: 15px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* Container đăng nhập */
+.auth-container {
+  max-width: 400px;
+  margin: 60px auto;
+  background: #1a1a1a; /* nền đen */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding-right: 57px;
+  margin-top: 100px;
+}
+
+/* Tiêu đề */
+.auth-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #e50914; /* đỏ CGV */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Form */
+.auth-form {
+  text-align: left;
+}
+
+.auth-field {
+  margin-bottom: 18px;
+}
+
+.auth-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f2f2f2;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background: #262626;
+  color: #cca6a6;
+  font-size: 15px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-input:focus {
+  border: 1px solid #e50914;
+  outline: none;
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.7);
+}
+
+/* Nút */
+.auth-button {
+  width: 100%;
+  background: #e50914;
+  border: none;
+  padding: 12px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.auth-button:hover {
+  background: #b20710;
+}
+
+/* Thông báo lỗi */
+.error-message {
+  background: rgba(229, 9, 20, 0.2);
+  color: #ff4d4d;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Link đăng ký */
+.auth-link {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.auth-link a {
+  color: #e50914;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+
