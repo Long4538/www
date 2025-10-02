@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- CSS Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- CSS tuỳ chỉnh của dự án -->
     <link rel="stylesheet" href="/Webdior/assets/css/style.css">
     <!-- Biểu tượng trang (Favicon) -->
@@ -56,8 +58,18 @@
                 </ul>
                 <form class="d-none d-md-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Tìm kiếm mùi hương..." aria-label="Tìm kiếm">
+                    <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
                 </form>
-                <button class="btn btn-outline-dark ms-2">Giỏ hàng</button>
+                <div class="d-flex align-items-center gap-2 ms-2">
+                    <a href="#" class="text-dark" title="Giỏ hàng" style="position: relative;">
+                        <i class="fas fa-shopping-cart fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">0</span>
+                    </a>
+                    <a href="/Webdior/page/dang-nhap.php" class="text-dark" title="Đăng nhập">
+                        <i class="fas fa-user fs-5"></i>
+                    </a>
+                    <button class="btn btn-dark btn-sm ms-2">Liên hệ tư vấn</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -72,7 +84,6 @@
                         <p class="text-secondary mb-3">Khám phá bộ sưu tập nước hoa chính hãng, tuyển chọn tinh tế.</p>
                         <div class="d-flex gap-2">
                             <a class="btn btn-dark" href="#noi-bat">Mua ngay</a>
-                            <a class="btn btn-outline-dark" href="#thuong-hieu">Khám phá thương hiệu</a>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -161,19 +172,6 @@
             </div>
         </section>
 
-        <!-- Thương hiệu -->
-        <section id="thuong-hieu" class="py-4">
-            <div class="container">
-                <h2 class="h3 mb-3" style="font-family:'Playfair Display',serif">Thương hiệu</h2>
-                <div class="d-flex flex-wrap gap-2 text-secondary">
-                    <span class="badge text-bg-secondary rounded-pill">Dior</span>
-                    <span class="badge text-bg-secondary rounded-pill">Chanel</span>
-                    <span class="badge text-bg-secondary rounded-pill">Gucci</span>
-                    <span class="badge text-bg-secondary rounded-pill">YSL</span>
-                    <span class="badge text-bg-secondary rounded-pill">Tom Ford</span>
-                </div>
-            </div>
-        </section>
 
         <!-- Cửa hàng (địa điểm) -->
         <section id="lien-he" class="py-4">
@@ -224,8 +222,8 @@
 
     <!-- Gói JS Bootstrap 5 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- JS dự án -->
-    <script src="/Webdior/js/index.js"></script>
+    <!-- JS cho trang chủ -->
+    <script src="/Webdior/js/trang-chu.js"></script>
 </body>
 </html>
 

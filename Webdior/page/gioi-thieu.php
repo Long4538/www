@@ -70,17 +70,27 @@
     </main>
 
     <footer class="border-top py-3 bg-light">
-        <div class="container d-flex justify-content-between align-items-center">
+        <div class="container d-grid" style="grid-template-columns:1fr auto auto; gap:16px; align-items:center;">
             <div class="d-flex align-items-center gap-2">
                 <img src="/Webdior/images/logoDior.png" alt="Dior Logo" height="22">
                 <p class="mb-0 text-secondary">Webdior | Nước hoa chính hãng</p>
             </div>
-            <div class="text-secondary">© <?php echo date('Y'); ?> Webdior</div>
+            <nav class="d-flex align-items-center gap-3">
+                <a class="text-secondary" href="#">Chính sách bảo mật</a>
+                <a class="text-secondary" href="#">Thanh toán</a>
+                <a class="text-secondary" href="#">Bảo hành</a>
+            </nav>
+            <div class="d-flex gap-2 text-secondary">
+                <a class="text-secondary" href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a class="text-secondary" href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a class="text-secondary" href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/Webdior/js/index.js"></script>
+    <!-- JS cho trang giới thiệu -->
+    <script src="/Webdior/js/gioi-thieu.js"></script>
 </body>
 </html>
 
