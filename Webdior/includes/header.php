@@ -30,15 +30,6 @@ $base_url = '/Webdior';
                         <li><a class="dropdown-item" href="#nuoc-hoa-nu">Nước hoa nữ</a></li>
                         <li><a class="dropdown-item" href="#unisex">Unisex</a></li>
                         <li><a class="dropdown-item" href="#body-spray">Body spray</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="#">Theo nhu cầu</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#van-phong">Văn phòng</a></li>
-                                <li><a class="dropdown-item" href="#hen-ho">Hẹn hò</a></li>
-                                <li><a class="dropdown-item" href="#the-thao">Thể thao</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="#tin-tuc">Tin tức</a></li>

@@ -40,15 +40,6 @@
                             <li><a class="dropdown-item" href="#nuoc-hoa-nu">Nước hoa nữ</a></li>
                             <li><a class="dropdown-item" href="#unisex">Unisex</a></li>
                             <li><a class="dropdown-item" href="#body-spray">Body spray</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="dropdown-submenu">
-                                <a class="dropdown-item dropdown-toggle" href="#">Theo nhu cầu</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#van-phong">Văn phòng</a></li>
-                                    <li><a class="dropdown-item" href="#hen-ho">Hẹn hò</a></li>
-                                    <li><a class="dropdown-item" href="#the-thao">Thể thao</a></li>
-                                </ul>
-                            </li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#tin-tuc">Tin tức</a></li>
@@ -159,64 +150,52 @@
         </section>
 
         <!-- Các giá trị nổi bật (USP) -->
-        <section class="py-4 border-top border-bottom">
+        <section class="py-4 border-top border-bottom bg-dark text-white">
             <div class="container">
                 <div class="row row-cols-2 row-cols-md-4 g-3">
-                    <div class="col"><div class="usp-item p-3 text-center rounded-3">Chính hãng 100%</div></div>
-                    <div class="col"><div class="usp-item p-3 text-center rounded-3">Giao hàng nhanh</div></div>
-                    <div class="col"><div class="usp-item p-3 text-center rounded-3">Tư vấn mùi hương miễn phí</div></div>
-                    <div class="col"><div class="usp-item p-3 text-center rounded-3">Đổi trả dễ dàng</div></div>
+                    <div class="col">
+                        <div class="d-flex align-items-center justify-content-center text-center">
+                            <div>
+                                <i class="fas fa-certificate fa-2x mb-2"></i>
+                                <h6 class="mb-1">Chính hãng 100%</h6>
+                                <small class="text-light">Cam kết sản phẩm chính hãng 100%</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex align-items-center justify-content-center text-center">
+                            <div>
+                                <i class="fas fa-shipping-fast fa-2x mb-2"></i>
+                                <h6 class="mb-1">Chính sách đổi trả</h6>
+                                <small class="text-light">Chính sách đổi hàng và tích điểm thành viên</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex align-items-center justify-content-center text-center">
+                            <div>
+                                <i class="fas fa-headset fa-2x mb-2"></i>
+                                <h6 class="mb-1">Tư vấn & hỗ trợ</h6>
+                                <small class="text-light">Tư vấn và hỗ trợ gói quà miễn phí</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex align-items-center justify-content-center text-center">
+                            <div>
+                                <i class="fas fa-truck fa-2x mb-2"></i>
+                                <h6 class="mb-1">Miễn phí giao hàng</h6>
+                                <small class="text-light">Miễn phí giao hàng cho hóa đơn từ 1.000.000đ</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-
-        <!-- Cửa hàng (địa điểm) -->
-        <section id="lien-he" class="py-4">
-            <div class="container">
-                <h2 class="h3 mb-3" style="font-family:'Playfair Display',serif">Cửa hàng</h2>
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <div class="p-3 rounded-3 bg-transparent border border-secondary-subtle h-100">
-                            <h3 class="h5">Hà Nội</h3>
-                            <p class="mb-0 text-secondary">17 Ngõ 236 Khương Đình, Thanh Xuân</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-3 rounded-3 bg-transparent border border-secondary-subtle h-100">
-                            <h3 class="h5">Hà Nội</h3>
-                            <p class="mb-0 text-secondary">108 Hoà Mã, Hai Bà Trưng</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-3 rounded-3 bg-transparent border border-secondary-subtle h-100">
-                            <h3 class="h5">TP.HCM</h3>
-                            <p class="mb-0 text-secondary">225F Trần Quang Khải, Quận 1</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer class="border-top py-3 bg-light">
-        <div class="container d-grid" style="grid-template-columns:1fr auto auto; gap:16px; align-items:center;">
-            <div class="d-flex align-items-center gap-2">
-                <img src="/Webdior/images/logoDior.png" alt="Dior Logo" height="22">
-                <p class="mb-0 text-secondary">Webdior | Nước hoa chính hãng</p>
-            </div>
-            <nav class="d-flex align-items-center gap-3">
-                <a class="text-secondary" href="#">Chính sách bảo mật</a>
-                <a class="text-secondary" href="#">Thanh toán</a>
-                <a class="text-secondary" href="#">Bảo hành</a>
-            </nav>
-            <div class="d-flex gap-2 text-secondary">
-                <a class="text-secondary" href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a class="text-secondary" href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a class="text-secondary" href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-            </div>
-        </div>
-    </footer>
+    <?php include 'includes/footer.php';?>
 
     <!-- Gói JS Bootstrap 5 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
