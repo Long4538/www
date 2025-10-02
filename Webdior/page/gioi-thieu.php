@@ -10,25 +10,7 @@
     <link rel="stylesheet" href="/Webdior/assets/css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="/Webdior/">
-                <img src="/Webdior/images/logoDior.png" alt="Dior Logo" height="28" class="me-2">
-                <span class="visually-hidden">Webdior</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/Webdior/page/gioi-thieu.php">Giới thiệu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Webdior/#bo-suu-tap">Bộ sưu tập</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Webdior/#thuong-hieu">Thương hiệu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Webdior/#lien-he">Liên hệ</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include '../includes/header.php';?>
 
     <main class="py-5">
         <div class="container">
@@ -69,24 +51,7 @@
         </div>
     </main>
 
-    <footer class="border-top py-3 bg-light">
-        <div class="container d-grid" style="grid-template-columns:1fr auto auto; gap:16px; align-items:center;">
-            <div class="d-flex align-items-center gap-2">
-                <img src="/Webdior/images/logoDior.png" alt="Dior Logo" height="22">
-                <p class="mb-0 text-secondary">Webdior | Nước hoa chính hãng</p>
-            </div>
-            <nav class="d-flex align-items-center gap-3">
-                <a class="text-secondary" href="#">Chính sách bảo mật</a>
-                <a class="text-secondary" href="#">Thanh toán</a>
-                <a class="text-secondary" href="#">Bảo hành</a>
-            </nav>
-            <div class="d-flex gap-2 text-secondary">
-                <a class="text-secondary" href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a class="text-secondary" href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a class="text-secondary" href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-            </div>
-        </div>
-    </footer>
+    <?php include '../includes/footer.php';?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JS cho trang giới thiệu -->
