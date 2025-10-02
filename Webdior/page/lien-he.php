@@ -31,8 +31,8 @@
                         <div class="mb-4">
                             <h5 class="mb-3"><i class="fas fa-phone text-primary me-2"></i>Hotline</h5>
                             <ul class="list-unstyled ms-4">
-                                <li class="mb-2">Khương Đình: <strong>058 950 6666</strong></li>
-                                <li class="mb-2">Hoà Mã: <strong>091 116 5686</strong></li>
+                                <li class="mb-2">Thanh Châu: <strong>058 950 6666</strong></li>
+                                <li class="mb-2">Hữu Lộc: <strong>091 116 5686</strong></li>
                             </ul>
                         </div>
 

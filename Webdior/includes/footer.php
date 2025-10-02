@@ -14,13 +14,11 @@ $base_url = '/Webdior';
                     Mỗi mùi hương là một tuyến ngôn thầm lặng dành cho người có gù sống riêng biệt.
                 </p>
                 <div class="mt-3">
-                    <p class="mb-1 small"><i class="fas fa-map-marker-alt me-2"></i>Khuông Định: 058 950 6666</p>
-                    <p class="mb-1 small"><i class="fas fa-map-marker-alt me-2"></i>Hoà Mã: 091 116 5686</p>
+                    <p class="mb-1 small"><i class="fas fa-map-marker-alt me-2"></i>Thanh Châu: 058 950 6666</p>
+                    <p class="mb-1 small"><i class="fas fa-map-marker-alt me-2"></i>Hữu Lộc: 091 116 5686</p>
                     <p class="mb-0 small"><i class="fas fa-envelope me-2"></i>diorperfumestore@gmail.com</p>
                 </div>
-                <div class="mt-3">
-                    <img src="<?php echo $base_url; ?>/images/bo-cong-thuong.png" alt="Bộ Công Thương" height="40" class="me-2">
-                </div>
+                
             </div>
 
             <!-- Cột 2: Liên kết nhanh -->
@@ -67,10 +65,9 @@ $base_url = '/Webdior';
             <div class="col-lg-3 col-md-12">
                 <h5 class="fw-bold mb-3">Theo dõi chúng tôi</h5>
                 <div class="d-flex gap-3 mb-4">
-                    <a href="#" class="text-dark fs-4" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-dark fs-4" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" class="text-dark fs-4" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-dark fs-4" title="Shopee"><i class="fas fa-shopping-bag"></i></a>
+                    <a href="#" class="text-dark fs-3" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-dark fs-3" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="text-dark fs-3" title="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>

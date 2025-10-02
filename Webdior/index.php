@@ -1,23 +1,8 @@
+<?php $page_title = 'Trang chủ | Webdior'; ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webdior - Nước hoa chính hãng</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- CSS Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS tuỳ chỉnh của dự án -->
-    <link rel="stylesheet" href="/Webdior/assets/css/style.css">
-    <!-- Biểu tượng trang (Favicon) -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/Webdior/images/logoDior.png?v=1">
-    <link rel="icon" type="image/png" sizes="16x16" href="/Webdior/images/logoDior.png?v=1">
-    <link rel="apple-touch-icon" sizes="180x180" href="/Webdior/images/logoDior.png?v=1">
-    <!-- Font Awesome 6 (CSS) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <?php include 'includes/head.php'; ?>
 </head>
 <body>
     <!-- Header / Thanh điều hướng (Navbar - Bootstrap) -->
@@ -37,7 +22,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="p-3 rounded-4 hero-card">
-                            <img src="/Webdior/assets/img/hero-bottle.jpg" alt="Hero Bottle">
+                            <img src="/Webdior/images/gioithieu/hero.jpg" alt="Hero Bottle">
                         </div>
                     </div>
                 </div>
@@ -57,6 +42,13 @@
             </div>
         </section>
 
+        <!-- Anchor sections cho dropdown navigation -->
+        <div id="nuoc-hoa-nam" style="padding-top: 80px; margin-top: -80px;"></div>
+        <div id="nuoc-hoa-nu" style="padding-top: 80px; margin-top: -80px;"></div>
+        <div id="unisex" style="padding-top: 80px; margin-top: -80px;"></div>
+        <div id="body-spray" style="padding-top: 80px; margin-top: -80px;"></div>
+        <div id="tin-tuc" style="padding-top: 80px; margin-top: -80px;"></div>
+
         <!-- Sản phẩm nổi bật -->
         <section id="noi-bat" class="py-3">
             <div class="container">
@@ -65,9 +57,10 @@
                     <a class="text-secondary" href="#tat-ca">Xem tất cả</a>
                 </div>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
+                    <!-- Hàng 1: 4 sản phẩm chính -->
                     <div class="col">
                         <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/sauvage-edt-b.jpg" alt="Sản phẩm 1">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/sauvage-edt-b.jpg" alt="Dior Sauvage EDT">
                             <div class="card-body px-0">
                                 <h3 class="h6 mb-1">Dior Sauvage EDT</h3>
                                 <p class="price mb-2">2.890.000₫</p>
@@ -77,7 +70,7 @@
                     </div>
                     <div class="col">
                         <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/blooming-bouquet-b.jpg" alt="Sản phẩm 2">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/blooming-bouquet-b.jpg" alt="Miss Dior Blooming Bouquet">
                             <div class="card-body px-0">
                                 <h3 class="h6 mb-1">Miss Dior Blooming Bouquet</h3>
                                 <p class="price mb-2">3.150.000₫</p>
@@ -87,7 +80,7 @@
                     </div>
                     <div class="col">
                         <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/dior-homme-intense-b.jpg" alt="Sản phẩm 3">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/dior-homme-intense-b.jpg" alt="Dior Homme Intense">
                             <div class="card-body px-0">
                                 <h3 class="h6 mb-1">Dior Homme Intense</h3>
                                 <p class="price mb-2">3.490.000₫</p>
@@ -97,10 +90,52 @@
                     </div>
                     <div class="col">
                         <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/jadore-parfum-b.jpg" alt="Sản phẩm 4">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/jadore-parfum-b.jpg" alt="J'adore Parfum d'Eau">
                             <div class="card-body px-0">
-                                <h3 class="h6 mb-1">J’adore Parfum d’Eau</h3>
+                                <h3 class="h6 mb-1">J'adore Parfum d'Eau</h3>
                                 <p class="price mb-2">3.990.000₫</p>
+                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Hàng 2: 4 sản phẩm mới từ LAN Perfume -->
+                    <div class="col">
+                        <article class="card bg-transparent border-0 product-card p-2">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/jadore-edp-b.jpg" alt="Dior J’adore EDP">
+                            <div class="card-body px-0">
+                                <h3 class="h6 mb-1">Dior J’adore EDP</h3>
+                                <p class="price mb-2">2.750.000₫</p>
+                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col">
+                        <article class="card bg-transparent border-0 product-card p-2">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/miss-dior-rose-n-rose-b.jpg" alt="Miss Dior Rose N'Roses">
+                            <div class="card-body px-0">
+                                <h3 class="h6 mb-1">Miss Dior Rose N'Roses</h3>
+                                <p class="price mb-2">3.300.000₫</p>
+                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col">
+                        <article class="card bg-transparent border-0 product-card p-2">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/sauvage-edp.jpg" alt="Dior Sauvage Parfum">
+                            <div class="card-body px-0">
+                                <h3 class="h6 mb-1">Dior Sauvage Parfum</h3>
+                                <p class="price mb-2">4.150.000₫</p>
+                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col">
+                        <article class="card bg-transparent border-0 product-card p-2">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/joy-intense-b.jpg" alt="Dior Joy Intense">
+                            <div class="card-body px-0">
+                                <h3 class="h6 mb-1">Dior Joy Intense</h3>
+                                <p class="price mb-2">3.650.000₫</p>
                                 <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
                             </div>
                         </article>
@@ -155,12 +190,9 @@
 
     </main>
 
-    <?php include 'includes/footer.php';?>
+    <?php include 'includes/footer.php'; ?>
 
-    <!-- Gói JS Bootstrap 5 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- JS cho trang chủ -->
-    <script src="/Webdior/js/trang-chu.js"></script>
+    <?php include 'includes/scripts.php'; ?>
 </body>
 </html>
 

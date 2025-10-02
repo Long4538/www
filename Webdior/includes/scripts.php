@@ -29,5 +29,63 @@ switch($current_page) {
 
 <!-- Gói JS Bootstrap 5 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Bootstrap Dropdown Debug & Fix -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔍 Checking Bootstrap...');
+    
+    // Kiểm tra Bootstrap có load không
+    if (typeof bootstrap === 'undefined') {
+        console.error('❌ Bootstrap JavaScript CHƯA LOAD!');
+        return;
+    } else {
+        console.log('✅ Bootstrap JavaScript đã load');
+    }
+
+    // Kiểm tra dropdown elements
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    console.log('🎯 Tìm thấy', dropdownToggles.length, 'dropdown toggles');
+
+    // Khởi tạo Bootstrap dropdowns một cách rõ ràng
+    dropdownToggles.forEach(function(toggle, index) {
+        console.log('🔧 Khởi tạo dropdown', index + 1);
+        try {
+            new bootstrap.Dropdown(toggle);
+        } catch (error) {
+            console.error('❌ Lỗi khởi tạo dropdown:', error);
+        }
+    });
+
+    // Smooth scroll cho anchor links (không ảnh hưởng dropdown)
+    document.querySelectorAll('a[href^="#"]:not(.dropdown-toggle)').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            const target = document.querySelector(href);
+            if (target && href !== '#') {
+                e.preventDefault();
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Debug events
+    document.addEventListener('show.bs.dropdown', function(e) {
+        console.log('🔓 Dropdown đang mở:', e.target);
+    });
+    
+    document.addEventListener('shown.bs.dropdown', function(e) {
+        console.log('✅ Dropdown đã mở:', e.target);
+    });
+
+    document.addEventListener('hide.bs.dropdown', function(e) {
+        console.log('🔒 Dropdown đang đóng:', e.target);
+    });
+});
+</script>
+
 <!-- JS cho trang hiện tại -->
 <script src="<?php echo $base_url; ?>/js/<?php echo $js_file; ?>"></script>

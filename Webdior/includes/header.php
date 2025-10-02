@@ -24,15 +24,15 @@ $base_url = '/Webdior';
                        href="<?php echo $base_url; ?>/page/gioi-thieu.php">Giới thiệu</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#bo-suu-tap" id="dropdownCollections" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bộ sưu tập</a>
+                    <a class="nav-link dropdown-toggle" href="<?php echo $base_url; ?>/#bo-suu-tap" id="dropdownCollections" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bộ sưu tập</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownCollections">
-                        <li><a class="dropdown-item" href="#nuoc-hoa-nam">Nước hoa nam</a></li>
-                        <li><a class="dropdown-item" href="#nuoc-hoa-nu">Nước hoa nữ</a></li>
-                        <li><a class="dropdown-item" href="#unisex">Unisex</a></li>
-                        <li><a class="dropdown-item" href="#body-spray">Body spray</a></li>
+                        <li><a class="dropdown-item" href="<?php echo $base_url; ?>/#nuoc-hoa-nam">Nước hoa nam</a></li>
+                        <li><a class="dropdown-item" href="<?php echo $base_url; ?>/#nuoc-hoa-nu">Nước hoa nữ</a></li>
+                        <li><a class="dropdown-item" href="<?php echo $base_url; ?>/#unisex">Unisex</a></li>
+                        <li><a class="dropdown-item" href="<?php echo $base_url; ?>/#body-spray">Body spray</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#tin-tuc">Tin tức</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base_url; ?>/#tin-tuc">Tin tức</a></li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo ($current_page == 'lien-he') ? 'active' : ''; ?>" 
                        href="<?php echo $base_url; ?>/page/lien-he.php">Liên hệ</a>

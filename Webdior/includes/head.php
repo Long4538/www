@@ -6,6 +6,10 @@ $base_url = '/Webdior';
 if (!isset($page_title)) {
     $page_title = 'Webdior - Nước hoa chính hãng';
 }
+
+// Xác định trang hiện tại để đường dẫn CSS chính xác
+$current_dir = basename(dirname($_SERVER['PHP_SELF']));
+$css_path = ($current_dir == 'page') ? '../assets/css/style.css' : 'assets/css/style.css';
 ?>
 
 <meta charset="UTF-8">
@@ -19,7 +23,7 @@ if (!isset($page_title)) {
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <!-- CSS tuỳ chỉnh của dự án -->
-<link rel="stylesheet" href="<?php echo $base_url; ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?php echo $css_path; ?>">
 <!-- Biểu tượng trang (Favicon) -->
 <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $base_url; ?>/images/logoDior.png?v=1">
 <link rel="icon" type="image/png" sizes="16x16" href="<?php echo $base_url; ?>/images/logoDior.png?v=1">
