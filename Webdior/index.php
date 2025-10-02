@@ -15,6 +15,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/Webdior/images/logoDior.png?v=1">
     <link rel="icon" type="image/png" sizes="16x16" href="/Webdior/images/logoDior.png?v=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/Webdior/images/logoDior.png?v=1">
+    <!-- Font Awesome 6 (CSS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 </head>
 <body>
     <!-- Header / Thanh điều hướng (Navbar - Bootstrap) -->
@@ -104,7 +107,7 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
                     <div class="col">
                         <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/assets/img/sample-1.jpg" alt="Sản phẩm 1">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/sauvage-edt-b.jpg" alt="Sản phẩm 1">
                             <div class="card-body px-0">
                                 <h3 class="h6 mb-1">Dior Sauvage EDT</h3>
                                 <p class="price mb-2">2.890.000₫</p>
@@ -114,7 +117,7 @@
                     </div>
                     <div class="col">
                         <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/assets/img/sample-2.jpg" alt="Sản phẩm 2">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/blooming-bouquet-b.jpg" alt="Sản phẩm 2">
                             <div class="card-body px-0">
                                 <h3 class="h6 mb-1">Miss Dior Blooming Bouquet</h3>
                                 <p class="price mb-2">3.150.000₫</p>
@@ -124,7 +127,7 @@
                     </div>
                     <div class="col">
                         <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/assets/img/sample-3.jpg" alt="Sản phẩm 3">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/dior-homme-intense-b.jpg" alt="Sản phẩm 3">
                             <div class="card-body px-0">
                                 <h3 class="h6 mb-1">Dior Homme Intense</h3>
                                 <p class="price mb-2">3.490.000₫</p>
@@ -134,7 +137,7 @@
                     </div>
                     <div class="col">
                         <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/assets/img/sample-4.jpg" alt="Sản phẩm 4">
+                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/jadore-parfum-b.jpg" alt="Sản phẩm 4">
                             <div class="card-body px-0">
                                 <h3 class="h6 mb-1">J’adore Parfum d’Eau</h3>
                                 <p class="price mb-2">3.990.000₫</p>
@@ -212,9 +215,9 @@
                 <a class="text-secondary" href="#">Bảo hành</a>
             </nav>
             <div class="d-flex gap-2 text-secondary">
-                <a class="text-secondary" href="#">Facebook</a>
-                <a class="text-secondary" href="#">Instagram</a>
-                <a class="text-secondary" href="#">TikTok</a>
+                <a class="text-secondary" href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a class="text-secondary" href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a class="text-secondary" href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
             </div>
         </div>
     </footer>
