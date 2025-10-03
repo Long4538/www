@@ -30,7 +30,7 @@
         </section>
 
         <!-- Danh mục -->
-        <section id="bo-suu-tap" class="py-4">
+        <!-- <section id="bo-suu-tap" class="py-4">
             <div class="container">
                 <h2 class="h3 mb-3" style="font-family:'Playfair Display',serif">Danh mục</h2>
                 <div class="row row-cols-2 row-cols-md-4 g-3">
@@ -40,7 +40,7 @@
                     <div class="col"><a class="d-block text-center p-3 rounded-3 category-card" href="#body-spray">Body spray</a></div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Anchor sections cho dropdown navigation -->
         <div id="nuoc-hoa-nam" style="padding-top: 80px; margin-top: -80px;"></div>

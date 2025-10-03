@@ -72,6 +72,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Email validation tiếng Việt
+    const emailInputs = document.querySelectorAll('input[type="email"]');
+    emailInputs.forEach(function(input) {
+        input.addEventListener('invalid', function(e) {
+            if (this.validity.typeMismatch) {
+                this.setCustomValidity('Vui lòng nhập đúng định dạng email (có chứa @)');
+            } else if (this.validity.valueMissing) {
+                this.setCustomValidity('Vui lòng nhập email');
+            }
+        });
+        
+        input.addEventListener('input', function() {
+            this.setCustomValidity('');
+        });
+    });
+
     // Debug events
     document.addEventListener('show.bs.dropdown', function(e) {
         console.log('🔓 Dropdown đang mở:', e.target);
