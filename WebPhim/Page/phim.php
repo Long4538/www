@@ -149,7 +149,8 @@ if ($chonTheLoai) {
         <!-- Lặp qua các thể loại để tạo menu -->
         <?php foreach ($theloai as $tl): ?>
           <li>
-            <a href="phim.php?theloai=<?php echo urlencode($tl); ?>" 
+            <!-- Hàm urlencode($tl) dùng để mã hóa tên thể loại cho an toàn trên URL (chuyển dấu cách thành dấu +, ký tự đặc biệt thành mã hóa). -->
+            <a href="phim.php?theloai=<?php echo urlencode($tl); ?>"
                class="<?php echo ($chonTheLoai === $tl) ? 'active' : ''; ?>">
                <?php echo $tl; ?>
             </a>
