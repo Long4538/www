@@ -69,6 +69,103 @@ img { transition: transform .25s ease, filter .25s ease; }
   pointer-events: auto;
 }
 
+/* Product page styles */
+.product-image-container {
+  position: relative;
+}
+
+.thumbnail-image {
+  transition: all 0.3s ease;
+  border: 2px solid #dee2e6;
+}
+
+.thumbnail-image:hover {
+  transform: scale(1.05);
+  border-color: #007bff;
+}
+
+.thumbnail-image.border-primary {
+  border-color: #007bff !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Product card link styles */
+.product-card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-card a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-card a:hover .card-img-top {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.product-card a:hover h3 {
+  color: #007bff !important;
+  transition: color 0.3s ease;
+}
+
+.product-info {
+  padding: 1rem;
+}
+
+.price-section {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 1rem;
+}
+
+.product-specs ul li {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.product-specs ul li:last-child {
+  border-bottom: none;
+}
+
+.product-card {
+  transition: all 0.3s ease;
+  border: 1px solid #dee2e6;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.fragrance-notes h5 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.fragrance-notes ul li {
+  padding: 0.25rem 0;
+  color: #6c757d;
+}
+
+.usage-guide ul li,
+.storage-guide ul li,
+.product-info-details ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .product-info {
+    padding: 0.5rem;
+  }
+  
+  .thumbnail-image {
+    margin-bottom: 0.5rem;
+  }
+}
+
 /* Khu vực Hero */
 .hero { border-bottom: 1px solid rgba(0,0,0,0.06); }
 .hero .text-secondary { color: var(--muted) !important; }

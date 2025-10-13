@@ -22,6 +22,9 @@ switch($current_page) {
     case 'lien-he':
         $js_file = 'lien-he.js';
         break;
+    case 'san-pham':
+        $js_file = 'san-pham.js';
+        break;
     default:
         $js_file = 'trang-chu.js'; // Mặc định
 }

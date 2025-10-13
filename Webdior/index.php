@@ -2,7 +2,25 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <?php include 'includes/head.php'; ?>
+    <?php 
+include 'includes/head.php'; 
+require_once 'config/database.php';
+
+// Lấy sản phẩm nổi bật từ database
+$featuredProducts = [];
+try {
+    $featuredProducts = fetchAll("
+        SELECT p.id, p.name, p.price, p.main_image, p.product_code
+        FROM products p
+        WHERE p.is_featured = 1 AND p.is_active = 1
+        ORDER BY p.created_at DESC
+        LIMIT 8
+    ");
+} catch (Exception $e) {
+    // Fallback về dữ liệu mẫu nếu database lỗi
+    $featuredProducts = [];
+}
+?>
 </head>
 <body>
     <!-- Header / Thanh điều hướng (Navbar - Bootstrap) -->
@@ -57,89 +75,37 @@
                     <a class="text-secondary" href="#tat-ca">Xem tất cả</a>
                 </div>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
-                    <!-- Hàng 1: 4 sản phẩm chính -->
-                    <div class="col">
-                        <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/sauvage-edt-b.jpg" alt="Dior Sauvage EDT">
-                            <div class="card-body px-0">
-                                <h3 class="h6 mb-1">Dior Sauvage EDT</h3>
-                                <p class="price mb-2">2.890.000₫</p>
-                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
+                    <?php if (!empty($featuredProducts)): ?>
+                        <?php foreach ($featuredProducts as $product): ?>
+                        <div class="col">
+                            <article class="card bg-transparent border-0 product-card p-2">
+                                <a href="/Webdior/page/san-pham.php?id=<?= $product['id'] ?>" class="text-decoration-none">
+                                    <?php if ($product['main_image']): ?>
+                                        <img class="card-img-top rounded-4" src="<?= htmlspecialchars($product['main_image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                                    <?php else: ?>
+                                        <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/placeholder.jpg" alt="<?= htmlspecialchars($product['name']) ?>">
+                                    <?php endif; ?>
+                                    <div class="card-body px-0">
+                                        <h3 class="h6 mb-1 text-dark"><?= htmlspecialchars($product['name']) ?></h3>
+                                        <p class="price mb-2 text-primary"><?= number_format($product['price'], 0, ',', '.') ?>₫</p>
+                                    </div>
+                                </a>
+                                <div class="px-2">
+                                    <button class="btn btn-outline-dark btn-sm w-100">Thêm vào giỏ</button>
+                                </div>
+                            </article>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <!-- Fallback: Hiển thị thông báo nếu không có sản phẩm -->
+                        <div class="col-12">
+                            <div class="text-center py-5">
+                                <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                                <h5 class="text-muted">Chưa có sản phẩm nổi bật</h5>
+                                <p class="text-muted">Hãy thêm sản phẩm qua <a href="/Webdior/admin/products.php">Admin Panel</a></p>
                             </div>
-                        </article>
-                    </div>
-                    <div class="col">
-                        <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/blooming-bouquet-b.jpg" alt="Miss Dior Blooming Bouquet">
-                            <div class="card-body px-0">
-                                <h3 class="h6 mb-1">Miss Dior Blooming Bouquet</h3>
-                                <p class="price mb-2">3.150.000₫</p>
-                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col">
-                        <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/dior-homme-intense-b.jpg" alt="Dior Homme Intense">
-                            <div class="card-body px-0">
-                                <h3 class="h6 mb-1">Dior Homme Intense</h3>
-                                <p class="price mb-2">3.490.000₫</p>
-                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col">
-                        <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/jadore-parfum-b.jpg" alt="J'adore Parfum d'Eau">
-                            <div class="card-body px-0">
-                                <h3 class="h6 mb-1">J'adore Parfum d'Eau</h3>
-                                <p class="price mb-2">3.990.000₫</p>
-                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
-                            </div>
-                        </article>
-                    </div>
-
-                    <!-- Hàng 2: 4 sản phẩm mới từ LAN Perfume -->
-                    <div class="col">
-                        <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/jadore-edp-b.jpg" alt="Dior J’adore EDP">
-                            <div class="card-body px-0">
-                                <h3 class="h6 mb-1">Dior J’adore EDP</h3>
-                                <p class="price mb-2">2.750.000₫</p>
-                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col">
-                        <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/miss-dior-rose-n-rose-b.jpg" alt="Miss Dior Rose N'Roses">
-                            <div class="card-body px-0">
-                                <h3 class="h6 mb-1">Miss Dior Rose N'Roses</h3>
-                                <p class="price mb-2">3.300.000₫</p>
-                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col">
-                        <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/sauvage-edp.jpg" alt="Dior Sauvage Parfum">
-                            <div class="card-body px-0">
-                                <h3 class="h6 mb-1">Dior Sauvage Parfum</h3>
-                                <p class="price mb-2">4.150.000₫</p>
-                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col">
-                        <article class="card bg-transparent border-0 product-card p-2">
-                            <img class="card-img-top rounded-4" src="/Webdior/images/sanpham/joy-intense-b.jpg" alt="Dior Joy Intense">
-                            <div class="card-body px-0">
-                                <h3 class="h6 mb-1">Dior Joy Intense</h3>
-                                <p class="price mb-2">3.650.000₫</p>
-                                <button class="btn btn-outline-dark btn-sm">Thêm vào giỏ</button>
-                            </div>
-                        </article>
-                    </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>
