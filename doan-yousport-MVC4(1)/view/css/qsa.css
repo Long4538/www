@@ -1,0 +1,108 @@
+/* Container */
+.qa-section-container {
+    max-width: 750px;
+    margin: 50px auto;
+    background: linear-gradient(145deg, #fdfdfd, #f5f9ff);
+    border-radius: 14px;
+    padding: 36px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    padding-bottom: 148px !important;
+}
+
+/* Tiêu đề */
+.qa-section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #222;
+}
+
+/* Form tìm kiếm */
+.qa-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.qa-input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.qa-input:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+
+.qa-btn {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.qa-btn:hover {
+    background: #0056b3;
+}
+
+/* Q&A list */
+.qa-list {
+    margin-top: 16px;
+}
+
+.qa-item {
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Câu hỏi */
+.qa-question {
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #007bff;
+    cursor: pointer;
+    position: relative;
+}
+
+.qa-question::after {
+    content: "+";
+    position: absolute;
+    right: 20px;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+/* Câu trả lời */
+.qa-answer {
+    max-height: 0;
+    overflow: hidden;
+    background: #f9fbff;
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.6;
+    padding: 0 20px;
+    transition: max-height 0.3s ease, padding 0.3s;
+}
+
+/* Khi mở */
+.qa-item.active .qa-answer {
+    max-height: 200px;
+    padding: 16px 20px;
+}
+
+.qa-item.active .qa-question::after {
+    content: "−";
+    transform: rotate(180deg);
+}

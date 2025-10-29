@@ -5,6 +5,7 @@
     <?php 
 include 'includes/head.php'; 
 require_once 'config/database.php';
+require_once 'config/security.php';
 
 // Lấy sản phẩm nổi bật từ database
 $featuredProducts = [];
@@ -91,7 +92,7 @@ try {
                                     </div>
                                 </a>
                                 <div class="px-2">
-                                    <button class="btn btn-outline-dark btn-sm w-100">Thêm vào giỏ</button>
+                                    <button type="button" class="btn btn-outline-dark btn-sm w-100 js-add-to-cart" data-product-id="<?= (int)$product['id'] ?>">Thêm vào giỏ</button>
                                 </div>
                             </article>
                         </div>
@@ -159,6 +160,9 @@ try {
     <?php include 'includes/footer.php'; ?>
 
     <?php include 'includes/scripts.php'; ?>
+    <script>
+    window.CART_CSRF = '<?php echo htmlspecialchars(csrf_generate_token('cart')); ?>';
+    </script>
 </body>
 </html>
 

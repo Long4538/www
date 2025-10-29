@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/../bootstrap.php';
 // Xác định đường dẫn gốc
-$base_url = '/Webdior';
+$base_url = BASE_URL;
 
 // Xác định file JS tương ứng với trang hiện tại
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
@@ -24,6 +25,9 @@ switch($current_page) {
         break;
     case 'san-pham':
         $js_file = 'san-pham.js';
+        break;
+    case 'quen-mat-khau':
+        $js_file = 'quen-mat-khau.js';
         break;
     default:
         $js_file = 'trang-chu.js'; // Mặc định
@@ -107,4 +111,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- JS cho trang hiện tại -->
-<script src="<?php echo $base_url; ?>/js/<?php echo $js_file; ?>"></script>
+<script src="<?php echo ASSETS_JS; ?>/pages/<?php echo $js_file; ?>"></script>

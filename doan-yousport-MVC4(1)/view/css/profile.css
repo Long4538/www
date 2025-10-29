@@ -1,0 +1,101 @@
+.profile-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 40px;
+    font-family: Arial, sans-serif;
+    padding-bottom: 121px !important;
+}
+
+/* Cột trái */
+.profile-sidebar {
+    width: 280px;
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.avatar-circle {
+    width: 100px;
+    height: 100px;
+    background-color: #e4a267;
+    color: #fff;
+    font-size: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-weight: bold;
+}
+
+.profile-sidebar .name {
+    color: #1a3b9f;
+}
+
+.profile-menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.profile-menu li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-menu li i {
+    margin-right: 8px;
+    color: #666;
+}
+
+.profile-menu li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.profile-menu li a:hover {
+    color: #1a3b9f;
+}
+
+/* Cột phải */
+.profile-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.profile-content h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.profile-content p {
+    margin: 8px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.membership-box {
+    margin-top: 25px;
+    padding: 15px;
+    background: #f0f4ff;
+    border-radius: 8px;
+    border: 1px solid #cddcff;
+}
+
+.membership-box a {
+    display: block;
+    margin-top: 5px;
+    color: #2a4bff;
+    text-decoration: none;
+}
+
+.membership-box a:hover {
+    text-decoration: underline;
+}

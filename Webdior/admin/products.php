@@ -6,9 +6,12 @@
  * Có thể thêm, sửa, xóa sản phẩm
  */
 
-// Bảo mật cơ bản - chỉ cho phép truy cập từ localhost
-if ($_SERVER['HTTP_HOST'] !== 'localhost' && $_SERVER['HTTP_HOST'] !== '127.0.0.1') {
-    die('Chỉ cho phép truy cập từ localhost');
+session_start();
+
+// Kiểm tra đăng nhập
+if (!isset($_SESSION['user_id']) || !$_SESSION['is_admin']) {
+    header('Location: /Webdior/page/dang-nhap.php');
+    exit;
 }
 
 require_once '../config/database.php';
@@ -99,10 +102,20 @@ $categories = fetchAll("SELECT * FROM categories WHERE is_active = 1 ORDER BY na
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-3 col-lg-2 admin-sidebar p-3">
-                <h4 class="mb-4">
-                    <i class="fas fa-crown text-warning"></i>
-                    Admin Panel
-                </h4>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="mb-0">
+                        <i class="fas fa-crown text-warning"></i>
+                        Admin Panel
+                    </h4>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i><?= htmlspecialchars($_SESSION['user_name'] ?? 'Admin') ?>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../logout.php"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <nav class="nav flex-column">
                     <a class="nav-link active" href="products.php">
                         <i class="fas fa-box me-2"></i>Sản phẩm

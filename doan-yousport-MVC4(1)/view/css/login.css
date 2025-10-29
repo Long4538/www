@@ -1,0 +1,129 @@
+/* Dùng chung cho cả login và register */
+.auth-container {
+    min-height: 100vh;   /* Chiều cao bằng 100% màn hình */
+    display: flex;
+    align-items: center; /* Căn giữa theo trục dọc */
+    justify-content: center; /* Căn giữa theo trục ngang */
+    background: #f0f2f5; /* Màu nền nhẹ cho đẹp */
+}
+
+/* Dùng chung cho cả login và register */
+.auth-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    padding: 36px 32px 28px 32px;
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid #e0e0e0; /* Thêm viền nhẹ */
+}
+
+/* Logo */
+.logo-login {
+    display: block;
+    margin: 0 auto 18px auto;
+    height: 54px;
+    text-align:center;
+    margin-bottom:24px;
+}
+
+/* Tiêu đề */
+.auth-box h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+}
+
+/* Nhóm input */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #b3d7ff;
+    font-size: 1rem;
+    background: #f9fbff;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+    background: #fff;
+}
+
+/* Nút */
+.btn {
+    width: 100%;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+/* Phần chuyển trang */
+.redirect {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 1rem;
+}
+
+.redirect a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: text-decoration 0.2s;
+}
+
+.redirect a:hover {
+    text-decoration: underline;
+}
+
+/* Link riêng */
+.redirect-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: text-decoration 0.2s;
+}
+.redirect-link:hover {
+    text-decoration: underline;
+}
+
+/* Link trở về trang chủ */
+.home-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 8px 0;
+    display: inline-block;
+    transition: color 0.2s;
+}
+.home-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

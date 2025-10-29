@@ -1,0 +1,211 @@
+/* =========================
+   Page Background
+========================= */
+.cart-page {
+    background: #f5f5f5; /* nền xám nhạt */
+    padding: 40px 0;
+    min-height: 100vh;
+}
+
+/* =========================
+   Container & Layout
+========================= */
+.cart__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 35px 45px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* =========================
+   Title
+========================= */
+.cart__title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #a00;
+    margin-bottom: 30px;
+}
+
+/* =========================
+   Table
+========================= */
+.cart__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 16px;
+}
+
+.cart__table th,
+.cart__table td {
+    padding: 14px 12px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #eee;
+}
+
+.cart__table th {
+    background: #f8f8f8;
+    font-weight: 600;
+    color: #555;
+}
+
+.cart__table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.cart__img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.cart__img:hover {
+    transform: scale(1.15);
+}
+
+/* =========================
+   Tổng cộng
+========================= */
+.cart__total-label {
+    text-align: right;
+    font-weight: 600;
+}
+
+.cart__total-value {
+    font-weight: 700;
+    color: red;
+    font-size: 18px;
+}
+
+/* =========================
+   Empty cart
+========================= */
+.cart__empty {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    padding: 30px 0;
+}
+
+/* =========================
+   Buttons
+========================= */
+.cart__actions {
+    text-align: center;
+    margin-top: 25px;
+    gap: 12px;
+}
+
+.cart__btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 123, 255, 0.25);
+    color: #fff;
+}
+
+.cart__btn-continue {
+    background: #666;
+}
+
+.cart__btn-continue:hover {
+    background: #444;
+}
+
+.cart__btn-checkout {
+    background: #d33;
+}
+
+.cart__btn-checkout:hover {
+    background: #a00;
+}
+
+/* =========================
+   Glow Effect
+========================= */
+.glow-btn {
+    animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+    0%,100% { box-shadow: 0 0 8px rgba(0,123,255,0.6);}
+    50% { box-shadow: 0 0 20px rgba(0,123,255,0.9);}
+}
+
+/* =========================
+   Fade-in Animation
+========================= */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px) {
+    .cart__container {
+        padding: 25px 20px;
+    }
+
+    .cart__title {
+        font-size: 24px;
+    }
+
+    .cart__table th,
+    .cart__table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .cart__img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .cart__btn {
+        padding: 10px 18px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart__title {
+        font-size: 22px;
+    }
+
+    .cart__table th,
+    .cart__table td {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .cart__img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .cart__btn {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+}

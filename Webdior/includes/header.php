@@ -1,4 +1,9 @@
 <?php
+// Khởi tạo session để kiểm tra trạng thái đăng nhập trên mọi trang
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Lấy tên trang hiện tại để đánh dấu active
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
 $page_dir = basename(dirname($_SERVER['PHP_SELF']));
@@ -43,15 +48,29 @@ $base_url = '/Webdior';
                 <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
             </form>
             <div class="d-flex align-items-center gap-2 ms-2">
-                <a href="#" class="text-dark" title="Giỏ hàng" style="position: relative;">
+                <a href="<?php echo isset($_SESSION['user_id']) ? $base_url . '/page/gio-hang.php' : $base_url . '/page/dang-nhap.php'; ?>" class="text-dark" title="Giỏ hàng" style="position: relative;">
                     <i class="fas fa-shopping-cart fs-5"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">0</span>
+                    <span data-cart-badge class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">0</span>
                 </a>
-                <a href="<?php echo $base_url; ?>/page/dang-nhap.php" class="text-dark" title="Đăng nhập">
-                    <i class="fas fa-user fs-5"></i>
-                </a>
+                <?php if (isset($_SESSION) && isset($_SESSION['user_id'])): ?>
+                    <a href="<?php echo $base_url; ?>/page/tai-khoan.php" class="text-dark" title="Tài khoản">
+                        <i class="fas fa-user fs-5"></i>
+                    </a>
+                <?php else: ?>
+                    <a href="<?php echo $base_url; ?>/page/dang-nhap.php" class="text-dark" title="Đăng nhập">
+                        <i class="fas fa-user fs-5"></i>
+                    </a>
+                <?php endif; ?>
                 <a href="<?php echo $base_url; ?>/page/lien-he.php" class="btn btn-dark btn-sm ms-2">Liên hệ tư vấn</a>
             </div>
         </div>
     </div>
 </nav>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    fetch('<?php echo $base_url; ?>/api/cart-count.php').then(r=>r.json()).then(d=>{
+        const badge=document.querySelector('[data-cart-badge]');
+        if(badge) badge.textContent = d.count ?? 0;
+    });
+});
+</script>

@@ -106,6 +106,8 @@ function loadProductData() {
                 console.log('📋 Product data:', data.data.product);
                 // Populate dữ liệu từ database
                 populateProductInfo(data.data.product);
+                // Cập nhật hình ảnh từ API (hoặc fallback từ main_image)
+                populateProductImages(data.data.images, data.data.product);
                 console.log('✅ Product data loaded from database');
             } else {
                 console.error('❌ API Error:', data.error);
@@ -346,6 +348,57 @@ function populateProductInfo(data) {
     document.getElementById('product-full-description').innerHTML = description;
     
     // Không xử lý hương thơm
+}
+
+// Hàm populate hình ảnh sản phẩm (main + thumbnails)
+function populateProductImages(images, product) {
+    const mainImageEl = document.getElementById('main-product-image');
+    const thumbnailEls = document.querySelectorAll('.thumbnail-image');
+
+    // Xác định ảnh chính
+    const mainFromList = Array.isArray(images) ? images.find(img => Number(img.is_main) === 1) : null;
+    const mainSrc = (mainFromList && mainFromList.image_path) || product.main_image || '/Webdior/images/products/placeholder.jpg';
+    const altText = product.name || 'Hình ảnh sản phẩm';
+
+    if (mainImageEl) {
+        mainImageEl.src = mainSrc;
+        mainImageEl.alt = altText;
+    }
+
+    // Cập nhật tiêu đề trang theo tên sản phẩm
+    if (product && product.name) {
+        document.title = product.name + ' - DIOR';
+    }
+
+    // Chuẩn bị danh sách thumbnail tối đa 4 ảnh
+    let thumbs = [];
+    if (Array.isArray(images) && images.length > 0) {
+        thumbs = images.slice(0, 4).map(img => ({
+            src: img.image_path || mainSrc,
+            alt: img.alt_text || altText
+        }));
+    }
+    // Fallback: nếu không có danh sách ảnh, dùng ảnh chính cho tất cả thumbnail
+    if (thumbs.length === 0) {
+        thumbs = new Array(4).fill({ src: mainSrc, alt: altText });
+    }
+
+    // Gán vào DOM
+    thumbnailEls.forEach((el, idx) => {
+        const t = thumbs[idx];
+        if (t) {
+            el.src = t.src;
+            el.alt = t.alt;
+            el.classList.add('border');
+            if (idx === 0) {
+                el.classList.remove('border');
+                el.classList.add('border-primary');
+            }
+        } else {
+            // Ẩn thumbnail thừa nếu ít hơn 4 ảnh
+            el.closest('.col-3')?.classList.add('d-none');
+        }
+    });
 }
 
 

@@ -1,4 +1,17 @@
-<?php $page_title = 'Đăng nhập | Webdior'; ?>
+<?php 
+$page_title = 'Đăng nhập | Webdior'; 
+session_start();
+
+// Kiểm tra nếu đã đăng nhập
+if (isset($_SESSION['user_id'])) {
+    if ($_SESSION['is_admin']) {
+        header('Location: /Webdior/admin/products.php');
+    } else {
+        header('Location: /Webdior/');
+    }
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -23,15 +36,33 @@
                         <h1 class="h3 mb-0" style="font-family:'Playfair Display',serif">Đăng Nhập</h1>
                     </div>
 
-                    <form action="#" method="POST" class="bg-white p-4 rounded shadow-sm">
+                    <?php if (isset($_SESSION['login_errors'])): ?>
+                        <div class="alert alert-danger">
+                            <?php foreach ($_SESSION['login_errors'] as $error): ?>
+                                <div><?= htmlspecialchars($error) ?></div>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php unset($_SESSION['login_errors']); ?>
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['login_success'])): ?>
+                        <div class="alert alert-success">
+                            Đăng nhập thành công!
+                        </div>
+                        <?php unset($_SESSION['login_success']); ?>
+                    <?php endif; ?>
+
+                    <?php require_once __DIR__ . '/../config/security.php'; $csrf_login = csrf_generate_token('login'); $old = $_SESSION['login_data'] ?? []; unset($_SESSION['login_data']); ?>
+                    <form action="/Webdior/login-process.php" method="POST" class="bg-white p-4 rounded shadow-sm">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_login); ?>">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" required value="<?php echo htmlspecialchars($old['email'] ?? ''); ?>">
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password" required value="<?php echo htmlspecialchars($old['password'] ?? ''); ?>">
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -41,7 +72,7 @@
                                     Ghi nhớ mật khẩu
                                 </label>
                             </div>
-                            <a href="#" class="text-decoration-none">Quên mật khẩu?</a>
+                            <a href="/Webdior/page/quen-mat-khau.php" class="text-decoration-none">Quên mật khẩu?</a>
                         </div>
 
                         <button type="submit" class="btn btn-dark w-100 mb-3">Đăng nhập</button>
@@ -49,6 +80,10 @@
                         <div class="text-center mb-3">
                             <span>Bạn chưa có tài khoản? </span>
                             <a href="/Webdior/page/dang-ky.php" class="text-decoration-none fw-bold">Đăng ký ngay</a>
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <a href="/Webdior/page/quen-mat-khau.php" class="text-decoration-none">Quên mật khẩu?</a>
                         </div>
 
                         <hr class="my-3">

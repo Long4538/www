@@ -1,0 +1,125 @@
+.about-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 20px;
+    line-height: 1.8;
+    font-size: 17px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #333;
+    background: #fff;
+}
+
+.about-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #2c3e50;
+    position: relative;
+}
+
+.about-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #e74c3c;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.about-section {
+    background: #f9f9f9;
+    padding: 20px 25px;
+    border-left: 5px solid #e74c3c;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.about-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #e74c3c;
+}
+
+.about-content p {
+    margin: 0;
+    text-align: justify;
+    color: #555;
+}
+
+
+
+
+/* Thương hiệu */
+.brands {
+    max-width: 1100px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.brands-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.brands-title::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: #d62828;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.brands-list img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease-in-out;
+}
+
+.brands-list img:hover {
+    transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about-container, .brands {
+        padding: 20px;
+    }
+
+    .about-title {
+        font-size: 28px;
+    }
+
+    .about-content h3 {
+        font-size: 18px;
+    }
+
+    .about-content p {
+        font-size: 15px;
+    }
+
+    .brands-title {
+        font-size: 22px;
+    }
+}

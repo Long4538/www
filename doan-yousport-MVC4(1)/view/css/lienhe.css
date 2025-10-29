@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+}
+
+.title {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.map-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 40px;
+    padding: 40px 0;
+}
+
+.form-left, .info-right {
+    flex: 1;
+}
+
+.subtitle {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+form textarea {
+    height: 120px;
+    resize: none;
+}
+
+form button {
+    background: #0d47a1;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+form button:hover {
+    background: #093a82;
+}
+
+.info-item {
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.info-item strong {
+    display: block;
+    margin-bottom: 5px;
+}

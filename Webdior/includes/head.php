@@ -1,15 +1,15 @@
 <?php
+require_once __DIR__ . '/../bootstrap.php';
 // Xác định đường dẫn gốc
-$base_url = '/Webdior';
+$base_url = BASE_URL;
 
 // Thiết lập title mặc định nếu không được định nghĩa
 if (!isset($page_title)) {
     $page_title = 'Webdior - Nước hoa chính hãng';
 }
 
-// Xác định trang hiện tại để đường dẫn CSS chính xác
-$current_dir = basename(dirname($_SERVER['PHP_SELF']));
-$css_path = ($current_dir == 'page') ? '../assets/css/style.css' : 'assets/css/style.css';
+// Đường dẫn CSS tuyệt đối theo BASE_URL
+$css_path = ASSETS_CSS . '/style.css';
 ?>
 
 <meta charset="UTF-8">

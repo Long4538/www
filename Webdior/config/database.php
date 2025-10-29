@@ -101,6 +101,17 @@ function countRecords($sql, $params = []) {
 }
 
 /**
+ * Hàm thực thi INSERT/UPDATE/DELETE và trả về số dòng bị ảnh hưởng
+ * @param string $sql
+ * @param array $params
+ * @return int
+ */
+function executeStatement($sql, $params = []) {
+    $stmt = executeQuery($sql, $params);
+    return $stmt->rowCount();
+}
+
+/**
  * Hàm insert và trả về ID mới
  * @param string $sql
  * @param array $params

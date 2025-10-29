@@ -1,4 +1,17 @@
-<?php $page_title = 'Đăng ký | Webdior'; ?>
+<?php 
+$page_title = 'Đăng ký | Webdior'; 
+session_start();
+
+// Kiểm tra nếu đã đăng nhập
+if (isset($_SESSION['user_id'])) {
+    if ($_SESSION['is_admin']) {
+        header('Location: /Webdior/admin/products.php');
+    } else {
+        header('Location: /Webdior/');
+    }
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -23,10 +36,53 @@
                         <h1 class="h3 mb-0" style="font-family:'Playfair Display',serif">Đăng Ký</h1>
                     </div>
 
-                    <form action="#" method="POST" class="bg-white p-4 rounded shadow-sm">
+                    <?php if (isset($_SESSION['register_errors'])): ?>
+                        <div class="alert alert-danger">
+                            <?php foreach ($_SESSION['register_errors'] as $error): ?>
+                                <div><?= htmlspecialchars($error) ?></div>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php unset($_SESSION['register_errors']); ?>
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['register_success'])): ?>
+                        <div class="alert alert-success">
+                            <?= htmlspecialchars($_SESSION['register_message'] ?? 'Đăng ký thành công!') ?>
+                        </div>
+                        <?php unset($_SESSION['register_success'], $_SESSION['register_message']); ?>
+                    <?php endif; ?>
+
+                    <?php 
+                    // Xóa dữ liệu session sau khi hiển thị
+                    unset($_SESSION['register_data']); 
+                    ?>
+
+                    <?php require_once __DIR__ . '/../config/security.php'; $csrf_register = csrf_generate_token('register'); ?>
+                    <form action="/Webdior/register-process.php" method="POST" class="bg-white p-4 rounded shadow-sm">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_register); ?>">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="first_name" class="form-label">Tên <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" required 
+                                       value="<?= htmlspecialchars($_SESSION['register_data']['first_name'] ?? '') ?>">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="last_name" class="form-label">Họ <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" required 
+                                       value="<?= htmlspecialchars($_SESSION['register_data']['last_name'] ?? '') ?>">
+                            </div>
+                        </div>
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" required 
+                                   value="<?= htmlspecialchars($_SESSION['register_data']['email'] ?? '') ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" 
+                                   value="<?= htmlspecialchars($_SESSION['register_data']['phone'] ?? '') ?>">
                         </div>
 
                         <div class="mb-3">

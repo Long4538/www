@@ -1,6 +1,8 @@
 <?php
 // Thiết lập tiêu đề trang
 $page_title = "Thông tin sản phẩm - DIOR";
+require_once __DIR__ . '/../config/security.php';
+$csrf_cart = csrf_generate_token('cart');
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -341,5 +343,8 @@ $page_title = "Thông tin sản phẩm - DIOR";
 
     <?php include '../includes/footer.php'; ?>
     <?php include '../includes/scripts.php'; ?>
+    <script>
+    window.CART_CSRF = '<?php echo htmlspecialchars($csrf_cart); ?>';
+    </script>
 </body>
 </html>
