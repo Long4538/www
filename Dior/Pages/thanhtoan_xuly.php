@@ -8,26 +8,25 @@ if (!isset($_SESSION['user_name'])) {
     exit;
 }
 
-// ✅ 2. Lấy user_id từ session
 $user_id = $_SESSION['user_id'] ?? null;
 
-// ✅ 3. Kiểm tra phương thức gửi form
+// ✅ 2. Chỉ xử lý POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: thanhtoan.php");
     exit;
 }
 
-// ✅ 4. Nhận dữ liệu từ form
+// ✅ 3. Nhận dữ liệu từ form
 $fullname   = trim($_POST['fullname']);
 $phone      = trim($_POST['phone']);
 $address    = trim($_POST['address']);
 $payment    = trim($_POST['payment']);
 $product_id = $_POST['product_id'] ?? null;
 
-// ✅ 5. Lấy giỏ hàng (nếu có)
+// ✅ 4. Lấy giỏ hàng (session)
 $cart = $_SESSION['cart'] ?? [];
 
-// ✅ 6. Xác định danh sách sản phẩm cần lưu
+// ✅ 5. Xác định sản phẩm cần thanh toán
 $order_items = [];
 
 if ($product_id) {
@@ -56,84 +55,72 @@ if ($product_id) {
     }
 }
 
-// ✅ 7. Tính tổng tiền
+// ✅ 6. Tính tổng tiền
 $total_amount = 0;
 foreach ($order_items as $item) {
     $total_amount += $item['price'] * $item['quantity'];
 }
 
-// ✅ 8. Giao dịch DB để đảm bảo toàn vẹn dữ liệu
 try {
     $pdo->beginTransaction();
 
-    // 🧾 Lưu đơn hàng vào bảng orders
-    // 🧾 Tạo mã đơn hàng ngẫu nhiên và duy nhất
-$order_number = 'ORD' . date('YmdHis') . rand(1000, 9999);
+    // ✅ 7. Tạo mã đơn hàng duy nhất
+    $order_number = 'ORD' . date('YmdHis') . rand(1000, 9999);
 
-$stmt = $pdo->prepare("
-    INSERT INTO orders (user_id, order_number, shipping_address, billing_address, payment_method, total, status, created_at)
-    VALUES (:user_id, :order_number, :shipping_address, :billing_address, :payment_method, :total, :status, NOW())
-");
-$stmt->execute([
-    ':user_id' => $user_id,
-    ':order_number' => $order_number,
-    ':shipping_address' => $address,
-    ':billing_address' => $address,
-    ':payment_method' => $payment,
-    ':total' => $total_amount,
-    ':status' => 'pending'
-]);
+    // ✅ 8. Lưu vào bảng orders
+    $stmt = $pdo->prepare("
+        INSERT INTO orders (user_id, order_number, shipping_address, billing_address, payment_method, total, status, created_at)
+        VALUES (:user_id, :order_number, :shipping_address, :billing_address, :payment_method, :total, :status, NOW())
+    ");
+    $stmt->execute([
+        ':user_id'          => $user_id,
+        ':order_number'     => $order_number,
+        ':shipping_address' => $address,
+        ':billing_address'  => $address,
+        ':payment_method'   => $payment,
+        ':total'            => $total_amount,
+        ':status'           => 'pending'
+    ]);
 
-
-    // 🔹 Lấy ID đơn hàng vừa tạo
     $order_id = $pdo->lastInsertId();
 
-    // 🧩 Dò cấu trúc bảng order_items (để tránh lỗi cột 'price')
-    $colsStmt = $pdo->query("SHOW COLUMNS FROM order_items");
-    $cols = $colsStmt->fetchAll(PDO::FETCH_COLUMN, 0);
+    // ✅ 9. Lưu từng sản phẩm vào order_items
+    $item_stmt = $pdo->prepare("
+        INSERT INTO order_items (order_id, product_id, product_name, quantity, unit_price, total_price, created_at)
+        VALUES (:order_id, :pid, :pname, :qty, :unit_price, :total_price, NOW())
+    ");
 
-    // Các tên cột giá có thể có
-    $possiblePriceNames = ['price','unit_price','amount','item_price','product_price','total_price'];
-    $priceCol = null;
-    foreach ($possiblePriceNames as $pn) {
-        if (in_array($pn, $cols, true)) {
-            $priceCol = $pn;
-            break;
-        }
-    }
-
-    // Tạo câu SQL động theo cột thực tế
-    $insertCols = ['order_id','product_id','product_name','quantity'];
-    $placeholders = [':order_id',':pid',':pname',':qty'];
-    if ($priceCol) {
-        $insertCols[] = $priceCol;
-        $placeholders[] = ':price';
-    }
-
-    $sql = "INSERT INTO order_items (" . implode(',', $insertCols) . ") VALUES (" . implode(',', $placeholders) . ")";
-    $item_stmt = $pdo->prepare($sql);
-
-    // 🛒 Lưu từng sản phẩm
     foreach ($order_items as $item) {
-        $params = [
-            ':order_id' => $order_id,
-            ':pid'      => $item['id'],
-            ':pname'    => $item['name'],
-            ':qty'      => $item['quantity'],
-        ];
-        if ($priceCol) {
-            $params[':price'] = $item['price'];
-        }
-        $item_stmt->execute($params);
+        $item_stmt->execute([
+            ':order_id'   => $order_id,
+            ':pid'        => $item['id'],
+            ':pname'      => $item['name'],
+            ':qty'        => $item['quantity'],
+            ':unit_price' => $item['price'],
+            ':total_price'=> $item['price'] * $item['quantity']
+        ]);
     }
 
-    // 🧹 Xóa giỏ hàng
+    // ✅ 10. Xóa giỏ hàng trong DB đúng cách
+    $stmt = $pdo->prepare("SELECT id FROM carts WHERE user_id = ?");
+    $stmt->execute([$user_id]);
+    $cartRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($cartRow) {
+        $cart_id = $cartRow['id'];
+
+        // Xóa sản phẩm trong giỏ hàng
+        $pdo->prepare("DELETE FROM cart_items WHERE cart_id = ?")->execute([$cart_id]);
+        // Xóa giỏ hàng chính
+        $pdo->prepare("DELETE FROM carts WHERE id = ?")->execute([$cart_id]);
+    }
+
+    // ✅ 11. Xóa giỏ hàng trong session
     unset($_SESSION['cart']);
 
-    // ✅ Hoàn tất giao dịch
+    // ✅ 12. Hoàn tất
     $pdo->commit();
 
-    // 🔁 Chuyển hướng sang trang thành công
     header("Location: dathang_thanhcong.php?order_id=" . $order_id);
     exit;
 

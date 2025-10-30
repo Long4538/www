@@ -88,8 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="container d-flex justify-content-between align-items-center small">
     <span><i class="bi bi-shop"></i> Shop Nước Hoa DA</span>
     <div class="d-flex gap-3">
-      <a href="login.php" class="text-light text-decoration-none"><i class="bi bi-person"></i> Đăng nhập</a>
-      <a href="register.php" class="text-light text-decoration-none"><i class="bi bi-person-plus"></i> Đăng ký</a>
+      <a href="dangnhap.php" class="text-light text-decoration-none"><i class="bi bi-person"></i> Đăng nhập</a>
       <a href="#" class="text-light text-decoration-none"><i class="bi bi-cart"></i> Giỏ hàng</a>
     </div>
   </div>

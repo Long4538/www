@@ -80,8 +80,8 @@
                 <li><a class="dropdown-item" href="camnhankhachhang.php">Cảm nhận của khách hàng</a></li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#">Về chúng tôi</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+            <li class="nav-item"><a class="nav-link" href="../Pages/vechungtoi.php">Về chúng tôi</a></li>
+            <li class="nav-item"><a class="nav-link" href="../Pages/lienhe.php">Liên hệ</a></li>
           </ul>
         </div>
       </div>

@@ -2,7 +2,7 @@
 session_start();
 require 'admincp/config.php';
 
-// ✅ Kiểm tra nếu chưa đăng nhập
+// ✅ 1. Kiểm tra đăng nhập
 if (!isset($_SESSION['user_id'])) {
   echo "<script>
     alert('⚠️ Vui lòng đăng nhập để mua sản phẩm!');
@@ -11,14 +11,14 @@ if (!isset($_SESSION['user_id'])) {
   exit;
 }
 
-// ✅ Lấy ID sản phẩm
+// ✅ 2. Lấy ID sản phẩm
 $product_id = $_GET['id'] ?? 0;
 if (!$product_id) {
   header("Location: index.php");
   exit;
 }
 
-// ✅ Lấy thông tin sản phẩm + ảnh chính
+// ✅ 3. Lấy thông tin sản phẩm
 $stmt = $pdo->prepare("
   SELECT p.*, pi.src AS image_src
   FROM products p
@@ -33,30 +33,21 @@ if (!$product) {
   exit;
 }
 
-// ✅ Nếu bấm "Mua ngay" (POST form)
+// ✅ 4. Khi người dùng bấm "Mua ngay"
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $quantity = isset($_POST['quantity']) ? max(1, intval($_POST['quantity'])) : 1;
 
-  // Nếu chưa có giỏ hàng -> tạo mới
-  if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-  }
+  // ✅ Tạo session "buy_now" riêng, không đụng đến giỏ hàng
+  $_SESSION['buy_now'] = [
+    'id'       => $product['id'],
+    'name'     => $product['name'],
+    'price'    => $product['price'],
+    'image'    => $product['image_src'] ?? 'Images/nuochoa/no-images.jpg',
+    'quantity' => $quantity
+  ];
 
-  // Nếu sản phẩm đã tồn tại trong giỏ -> cộng thêm
-  if (isset($_SESSION['cart'][$product_id])) {
-    $_SESSION['cart'][$product_id]['quantity'] += $quantity;
-  } else {
-    $_SESSION['cart'][$product_id] = [
-      'id' => $product['id'],
-      'name' => $product['name'],
-      'price' => $product['price'],
-      'image' => $product['image_src'] ?? 'Images/nuochoa/no-images.jpg',
-      'quantity' => $quantity
-    ];
-  }
-
-  // ✅ Sau khi thêm vào giỏ → chuyển đến trang thanh toán
-  header("Location: Pages/thanhtoan.php");
+  // ✅ Chuyển hướng đến trang thanh toán (chế độ mua ngay)
+  header("Location: Pages/thanhtoan.php?mode=buy_now");
   exit;
 }
 ?>
@@ -73,14 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-
-  <!-- 🎬 VIDEO NỀN -->
   <video autoplay muted loop playsinline class="video-background">
     <source src="Videos/hoadaoroi.mp4" type="video/mp4">
   </video>
 
   <div class="site-content">
-
     <!-- ========== TOP BAR ========== -->
     <div class="bg-brand text-light py-2">
       <div class="container d-flex justify-content-between align-items-center small">
@@ -109,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </div>
 
-    <!-- ========== HEADER ========== -->
+    <!-- HEADER -->
     <header class="py-3 bg-light border-bottom">
       <div class="container d-flex flex-wrap justify-content-between align-items-center">
         <a href="index.php" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
@@ -130,31 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </header>
 
-    <!-- ========== NAVBAR ========== -->
-    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
-      <div class="container">
-        <a class="navbar-brand fw-bold text-brand" href="index.php">Trang chủ</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link" href="Pages/gioithieu.php">Giới thiệu</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Nước hoa</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="Pages/nuochoanam.php">Nước hoa Nam</a></li>
-                <li><a class="dropdown-item" href="Pages/nuochoanu.php">Nước hoa Nữ</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="Pages/khuyenmai.php">Khuyến mãi</a></li>
-            <li class="nav-item"><a class="nav-link" href="Pages/phukien.php">Phụ kiện</a></li>
-            <li class="nav-item"><a class="nav-link" href="Pages/lienhe.php">Liên hệ</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
     <!-- ========== CHI TIẾT SẢN PHẨM ========== -->
     <section class="py-5">
       <div class="container">
@@ -173,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <span class="fw-bold text-danger fs-4"><?= number_format($product['price'], 0, ',', '.') ?>đ</span>
             </div>
 
-            <!-- ✅ Form mua ngay -->
             <form method="post">
               <div class="mb-3">
                 <label class="form-label fw-bold">Số lượng:</label>
@@ -187,7 +149,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
         </div>
 
-        <!-- Mô tả -->
         <div class="mt-5 bg-white p-4 rounded shadow-sm">
           <h4 class="fw-bold mb-3">Mô tả chi tiết</h4>
           <p><?= nl2br(htmlspecialchars($product['description'])) ?></p>
@@ -195,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </section>
 
-    <!-- ========== FOOTER ========== -->
+    <!-- FOOTER -->
     <footer class="pt-5 pb-3">
       <div class="container text-center">
         <small>© 2025 Shop Nước Hoa DA - All rights reserved.</small>
@@ -203,7 +164,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </footer>
   </div>
 
-  <!-- ===== Bootstrap JS ===== -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -175,7 +175,7 @@ $promo_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   <?php endif; ?>
                   <div class="d-flex justify-content-center gap-2 mt-2">
                     <a href="muangay.php?id=<?= $sp['id'] ?>" class="btn btn-brand btn-sm">Mua ngay</a>
-                    <a href="add_to_cart.php?id=<?= $sp['id'] ?>" class="btn btn-outline-secondary btn-sm">
+                    <a href="../add_to_cart.php?id=<?= $sp['id'] ?>" class="btn btn-outline-secondary btn-sm">
                       <i class="bi bi-cart"></i> Giỏ hàng
                     </a>
                   </div>

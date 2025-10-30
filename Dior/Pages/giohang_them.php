@@ -25,7 +25,7 @@ if ($product_id <= 0) {
 
 // ✅ Lấy thông tin sản phẩm
 $stmt = $pdo->prepare("
-    SELECT p.*, pi.src AS image_src 
+    SELECT p.*, pi.src AS Images_src 
     FROM products p 
     LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_primary = 1
     WHERE p.id = :id

@@ -1,17 +1,14 @@
 <?php
-// =============================
-// ✅ File: add_to_cart.php
-// Nhiệm vụ: Lưu sản phẩm vào giỏ hàng (session) khi bấm “Thêm vào giỏ”
-// =============================
+session_start();
+require 'admincp/config.php';
 
+// ✅ Hiển thị lỗi chi tiết (chỉ nên bật khi test)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-session_start();
-require 'admincp/config.php'; // Kết nối CSDL
-
-// 🔒 Kiểm tra nếu người dùng chưa đăng nhập
+// ✅ Kiểm tra đăng nhập
 if (!isset($_SESSION['user_id'])) {
     echo "<script>
         alert('⚠️ Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!');
@@ -20,37 +17,64 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// ✅ Lấy id sản phẩm khi người dùng bấm nút
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$user_id = $_SESSION['user_id'];
+$product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// ✅ Nếu id hợp lệ thì mới thêm vào giỏ
-if ($id > 0) {
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
-    $stmt->execute([$id]);
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($product) {
-        // Nếu giỏ hàng chưa có -> tạo mới
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
-        }
-
-        // Nếu sản phẩm đã tồn tại trong giỏ -> tăng số lượng
-        if (isset($_SESSION['cart'][$id])) {
-            $_SESSION['cart'][$id]['quantity'] += 1;
-        } else {
-            // Nếu sản phẩm chưa có trong giỏ -> thêm vào
-            $_SESSION['cart'][$id] = [
-                'id' => $product['id'],
-                'name' => $product['name'],
-                'price' => $product['price'],
-                'image' => $product['images'],
-                'quantity' => 1
-            ];
-        }
-    }
+if ($product_id <= 0) {
+    die("❌ Lỗi: Không có ID sản phẩm hợp lệ");
 }
 
-// ✅ Quay lại trang trước (index.php hoặc trang sản phẩm)
-header('Location: ' . $_SERVER['HTTP_REFERER']);
+// ✅ Lấy thông tin sản phẩm (có ảnh nếu cần)
+$stmt = $pdo->prepare("
+    SELECT p.id, p.name, p.price, pi.src AS image_src
+    FROM products p
+    LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_primary = 1
+    WHERE p.id = ?
+");
+$stmt->execute([$product_id]);
+$product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$product) {
+    die("❌ Không tìm thấy sản phẩm trong CSDL");
+}
+
+// ✅ Tìm hoặc tạo giỏ hàng của người dùng
+$stmt = $pdo->prepare("SELECT id FROM carts WHERE user_id = ?");
+$stmt->execute([$user_id]);
+$cart = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$cart) {
+    // 🟢 Nếu chưa có → tạo mới
+    $stmt = $pdo->prepare("INSERT INTO carts (user_id) VALUES (?)");
+    $stmt->execute([$user_id]);
+    $cart_id = $pdo->lastInsertId();
+} else {
+    $cart_id = $cart['id'];
+}
+
+// ✅ Kiểm tra sản phẩm đã có trong giỏ chưa
+$stmt = $pdo->prepare("
+    SELECT id, quantity 
+    FROM cart_items 
+    WHERE cart_id = ? AND product_id = ? AND (variant_id IS NULL OR variant_id = 0)
+");
+$stmt->execute([$cart_id, $product_id]);
+$item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($item) {
+    // 🟡 Nếu đã có → tăng số lượng
+    $stmt = $pdo->prepare("UPDATE cart_items SET quantity = quantity + 1 WHERE id = ?");
+    $stmt->execute([$item['id']]);
+} else {
+    // 🟢 Nếu chưa có → thêm mới
+    $stmt = $pdo->prepare("
+        INSERT INTO cart_items (cart_id, product_id, variant_id, quantity, price)
+        VALUES (?, ?, NULL, 1, ?)
+    ");
+    $stmt->execute([$cart_id, $product_id, $product['price']]);
+}
+
+// ✅ Chuyển hướng về giỏ hàng
+header("Location: Pages/giohang.php");
 exit;
+?>

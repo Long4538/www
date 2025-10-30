@@ -1,7 +1,50 @@
 <?php
 session_start();
-$cart = $_SESSION['cart'] ?? [];
+require '../admincp/config.php'; // ✅ Kết nối tới DB
+
+// 🔒 Kiểm tra đăng nhập
+if (!isset($_SESSION['user_id'])) {
+  echo "<script>
+      alert('⚠️ Vui lòng đăng nhập để xem giỏ hàng!');
+      window.location.href = 'dangnhap.php';
+  </script>";
+  exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
+// ✅ Lấy giỏ hàng của người dùng
+$stmt = $pdo->prepare("SELECT id FROM carts WHERE user_id = ?");
+$stmt->execute([$user_id]);
+$cart = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$cart_items = [];
 $total = 0;
+
+if ($cart) {
+  $cart_id = $cart['id'];
+
+  // ✅ Lấy chi tiết sản phẩm trong giỏ
+  $stmt = $pdo->prepare("
+      SELECT 
+          ci.id AS cart_item_id,
+          p.name,
+          p.price,
+          ci.quantity,
+          (ci.price * ci.quantity) AS total_price,
+          pi.src AS image_src
+      FROM cart_items ci
+      INNER JOIN products p ON ci.product_id = p.id
+      LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_primary = 1
+      WHERE ci.cart_id = ?
+  ");
+  $stmt->execute([$cart_id]);
+  $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($cart_items as $item) {
+    $total += $item['total_price'];
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +79,6 @@ $total = 0;
             <a href="dangnhap.php" class="text-light text-decoration-none"><i class="bi bi-person"></i> Đăng nhập</a>
             <a href="dangky.php" class="text-light text-decoration-none"><i class="bi bi-person-plus"></i> Đăng ký</a>
           <?php endif; ?>
-          <a href="Pages/muangay.php?id=<?= $sp['id'] ?>" class="btn btn-brand btn-sm">Mua ngay</a>
         </div>
       </div>
     </div>
@@ -81,7 +123,7 @@ $total = 0;
             </li>
             <li class="nav-item"><a class="nav-link" href="khuyenmai.php">Khuyến mãi</a></li>
             <li class="nav-item"><a class="nav-link" href="phukien.php">Phụ kiện</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+            <li class="nav-item"><a class="nav-link" href="lienhe.php">Liên hệ</a></li>
           </ul>
         </div>
       </div>
@@ -92,7 +134,7 @@ $total = 0;
       <div class="container bg-white p-4 rounded shadow">
         <h3 class="text-center mb-4 fw-bold text-brand">🛒 Giỏ hàng của bạn</h3>
 
-        <?php if (empty($cart)): ?>
+        <?php if (empty($cart_items)): ?>
           <div class="alert alert-info text-center">Giỏ hàng của bạn đang trống.</div>
         <?php else: ?>
           <div class="table-responsive">
@@ -101,39 +143,42 @@ $total = 0;
                 <tr>
                   <th>Hình ảnh</th>
                   <th>Tên sản phẩm</th>
-                  <th>Dung tích</th>
                   <th>Giá</th>
                   <th>Số lượng</th>
                   <th>Thành tiền</th>
+                  <th>Hành động</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($cart as $item): ?>
-                  <?php
-                    $subtotal = $item['price'] * $item['quantity'];
-                    $total += $subtotal;
-                  ?>
+                <?php foreach ($cart_items as $item): ?>
                   <tr>
-                    <td><img src="../<?= htmlspecialchars($item['image']) ?>" width="70" class="rounded shadow-sm"></td>
+                    <td>
+                      <img src="../<?= htmlspecialchars($item['image_src'] ?? 'uploads/no-image.png') ?>" width="70" class="rounded shadow-sm">
+                    </td>
                     <td><?= htmlspecialchars($item['name']) ?></td>
-                    <td><?= htmlspecialchars($item['variant'] ?? '-') ?></td>
                     <td><?= number_format($item['price'], 0, ',', '.') ?>đ</td>
                     <td><?= $item['quantity'] ?></td>
-                    <td class="fw-bold text-danger"><?= number_format($subtotal, 0, ',', '.') ?>đ</td>
+                    <td class="fw-bold text-danger"><?= number_format($item['total_price'], 0, ',', '.') ?>đ</td>
+                    <td>
+                      <a href="xoa_sanpham.php?id=<?= $item['cart_item_id'] ?>" 
+                         class="btn btn-sm btn-danger"
+                         onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')">
+                        <i class="bi bi-trash"></i> Xóa
+                      </a>
+                    </td>
                   </tr>
                 <?php endforeach; ?>
                 <tr class="table-secondary">
-                  <td colspan="5" class="text-end fw-bold">Tổng cộng:</td>
+                  <td colspan="4" class="text-end fw-bold">Tổng cộng:</td>
                   <td class="fw-bold text-danger"><?= number_format($total, 0, ',', '.') ?>đ</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <div class="d-flex justify-content-between mt-4">
-            <a href="../index.php" class="btn btn-secondary">
-              ← Tiếp tục mua sắm
-            </a>
+            <a href="../index.php" class="btn btn-secondary">← Tiếp tục mua sắm</a>
             <a href="thanhtoan.php" class="btn btn-success">
               <i class="bi bi-credit-card"></i> Thanh toán
             </a>
@@ -143,8 +188,32 @@ $total = 0;
     </section>
 
     <!-- Footer -->
-    <footer class="pt-5 pb-3 text-center">
-      <small>© 2025 Shop Nước Hoa DA - All rights reserved.</small>
+    <footer class="pt-5 pb-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold">Về chúng tôi</h5>
+            <p>Shop Nước Hoa DA cung cấp các dòng nước hoa chính hãng, giúp bạn tự tin và tỏa sáng mỗi ngày.</p>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold">Chính sách</h5>
+            <ul class="list-unstyled">
+              <li><a href="#">Chính sách đổi trả</a></li>
+              <li><a href="#">Bảo mật thông tin</a></li>
+              <li><a href="#">Giao hàng toàn quốc</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold">Liên hệ</h5>
+            <p><i class="bi bi-geo-alt"></i> 123 Nguyễn Trãi, TP.HCM</p>
+            <p><i class="bi bi-envelope"></i> contact@nuochoada.vn</p>
+            <p><i class="bi bi-telephone"></i> 0989 123 456</p>
+          </div>
+        </div>
+        <div class="border-top pt-3 text-center">
+          <small>© 2025 Shop Nước Hoa DA - All rights reserved.</small>
+        </div>
+      </div>
     </footer>
   </div>
 
